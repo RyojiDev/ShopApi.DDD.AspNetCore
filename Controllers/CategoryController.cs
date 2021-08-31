@@ -14,6 +14,8 @@ namespace ShopApi.DDD.AspNetCore.Controllers
     {
         [HttpGet]
         [Route("")]
+        [ResponseCache(VaryByHeader = "User-Agente", Location = ResponseCacheLocation.Any, Duration = 30)]
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<ActionResult<List<Category>>> Get([FromServices] DataContext context)
         {
             var categories = await context.Categories.AsNoTracking().ToListAsync();
